@@ -1,0 +1,102 @@
+name: synspades
+version: 'master'
+base: core18
+summary: Sandbox building and FPS videogame
+description: |
+  Synspades is a compatible client of Ace of Spades 0.75.
+  synSpades is a modified version of OpenSpades, with 
+  changes by Doctor Dank, including a bigger color palette 
+  thanks to Liza & other smaller changes such as macros
+  Can connect to a vanilla/pyspades/pysnip server.
+  Uses OpenGL/AL for better experience.
+  Open source, and cross platform.
+
+grade: stable
+confinement: strict
+
+apps:
+  synspades:
+    command: bin/launch_synspades
+    plugs:
+      - network
+      - network-bind
+      - opengl
+      - x11
+      - audio-playback
+
+parts:
+  scripts:
+    plugin: dump
+    source: snap/local
+    organize:
+      'launch_synspades': bin/
+  synspades:
+    plugin: cmake
+    configflags: [-DCMAKE_BUILD_TYPE=RelWithDebInfo]
+    source: https://github.com/c-um/synSpades.git
+    build-packages:
+      - clang
+      - imagemagick
+      - wget
+      - zip
+      - unzip
+      - pkg-config
+      - libglew-dev
+      - libcurl4-openssl-dev
+      - libsdl2-dev
+      - libsdl2-image-dev
+      - libalut-dev
+      - xdg-utils
+      - libfreetype6-dev
+      - libopus-dev
+      - libopusfile-dev
+      - libjpeg-dev
+      - libxinerama-dev
+      - libxft-dev
+    stage-packages:
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libglew2.0
+      - libopenal1
+      - libasn1-8-heimdal
+      - libasyncns0
+      - libcurl4
+      - libflac8
+      - libfreetype6
+      - libgssapi3-heimdal
+      - libhcrypto4-heimdal
+      - libheimbase1-heimdal
+      - libheimntlm0-heimdal
+      - libhx509-5-heimdal
+      - libjbig0
+      - libjpeg-turbo8
+      - libkrb5-26-heimdal
+      - libldap-2.4-2
+      - libnghttp2-14
+      - libogg0
+      - libopus0
+      - libopusfile0
+      - libpng16-16
+      - libpsl5
+      - libpulse0
+      - libroken18-heimdal
+      - librtmp1
+      - libsasl2-2
+      - libsdl2-2.0-0
+      - libsdl2-image-2.0-0
+      - libsndfile1
+      - libtiff5
+      - libvorbis0a
+      - libvorbisenc2
+      - libwayland-client0
+      - libwayland-cursor0
+      - libwayland-egl1
+      - libwebp6
+      - libwind0-heimdal
+      - libxcursor1
+      - libxi6
+      - libxinerama1
+      - libxkbcommon0
+      - libxrandr2
+      - libxrender1
+      - libxss1
